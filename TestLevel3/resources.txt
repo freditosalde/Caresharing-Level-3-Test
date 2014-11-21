@@ -1,0 +1,856 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Resource          testdata.txt
+
+*** Variables ***
+
+*** Keywords ***
+Open Browser To Test Page
+    Open Browser    ${URL}    ${BROWSER}
+    Delete All Cookies
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Test Page Should Be Open
+
+Test Page Should Be Open
+    Title Should Be    SCORE risicometer
+
+Verify GUI on the Welcome Page
+    Page Should Contain Element    ${Welcome_Header1}
+    Page Should Contain Element    ${Welcome_Header1.1}
+    Page Should Contain Element    ${Welcome_Header1.2}
+    Page Should Contain Element    ${Help}
+    Page Should Contain Element    ${Login Caresharing}
+    Page Should Contain    Ja
+    Page Should Contain    Nee
+    Page Should Contain Element    ${Reminder}
+    Page Should Contain Element    ${Chart}
+    Page Should Contain Element    ${Cardiovascular disease}
+    Page Should Contain Element    ${Age}
+    Page Should Contain Element    ${Gender}
+    Page Should Contain Element    ${Blood Pressure}
+    Page Should Contain Element    ${Cholesterol}
+    Page Should Contain Element    ${Cholesterol Guage}
+    Page Should Contain Element    ${Hdl-cholesterol}
+    Page Should Contain Element    ${Hdl Guage}
+    Page Should Contain Element    ${Smoking}
+    Page Should Contain Element    ${Diabetes}
+    Page Should Contain Element    ${Rheumatism}
+    Page Should Contain Element    ${Footer1}
+
+Verify Buttons, Input Fields and Radio buttons on Welcome Page
+    Page Should Contain Element    ${Add to Caresharing Button}
+    Page Should Contain Radio Button    ${RadioButton_Vascular_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Vascular_No}
+    Page Should Contain Textfield    ${Age Field}
+    Page Should Contain Radio Button    ${Gender_M_Radio}
+    Page Should Contain Radio Button    ${Gender_F_Radio}
+    Page Should Contain Textfield    ${Blood Pressure Field}
+    Page Should Contain Textfield    ${Cholesterol Field}
+    Page Should Contain Textfield    ${Hdl Field}
+    Page Should Contain Radio Button    ${RadioButton_Smoking_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Smoking_No}
+    Page Should Contain Radio Button    ${RadioButton_Diabetes_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Diabetes_No}
+    Page Should Contain Radio Button    ${RadioButton_Rheumatism_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Rheumatism_No}
+    Page Should Contain Button    ${Calculate Button}
+
+Loging Caresharing
+    Click Element    ${Login Caresharing}
+    Title Should Be    Account - Sign in
+    Page Should Contain Element    ${Login Form}
+    Page Should Contain    Login Caresharing
+    Page Should Contain Element    ${User Login Text}
+    Page Should Contain Textfield    ${User Login Field}
+    Page Should Contain Element    ${User Password Text}
+    Page Should Contain Element    ${User Password Field}
+    Page Should Contain Button    ${Login Button}
+    Page Should Contain Link    ${I can not login! Link}
+    Page Should Contain Link    ${Email the helpdesk for direct support. Link}
+    Page Should Contain Element    ${Logo}
+    Page Should Contain Link    ${Click here to view our support page. Link}
+    Input Text    ${User Login Field}    ${Username}
+    Input Text    ${User Password Field}    ${Password}
+    Click Button    ${Login Button}
+
+Verify Buttons, Input Fields and Radio buttons on SCORE Page
+    Page Should Contain Element    ${Search for previous score Field}
+    Page Should Contain Element    ${Applications Dropdown}
+    Page Should Contain Textfield    ${Patients Name Field}
+    Page Should Contain Textfield    ${Date of Birth Field}
+    Page Should Contain Textfield    ${Commentary Fields}
+    Page Should Contain Radio Button    ${RadioButton_Vascular2_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Vascular2_No}
+    Page Should Contain Textfield    ${Age Field}
+    Page Should Contain Radio Button    ${RadioButton_Gender_M}
+    Page Should Contain Radio Button    ${RadioButton_Gender_F}
+    Page Should Contain Textfield    ${Blood Pressure Field}
+    Page Should Contain Textfield    ${Cholesterol Field}
+    Page Should Contain Textfield    ${Hdl Field}
+    Page Should Contain Radio Button    ${RadioButton_Smoking2_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Smoking2_No}
+    Page Should Contain Radio Button    ${RadioButton_Diabetes2_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Diabetes2_No}
+    Page Should Contain Radio Button    ${RadioButton_Rheumatism2_Yes}
+    Page Should Contain Radio Button    ${RadioButton_Rheumatism2_No}
+    Page Should Contain Button    ${Calculate2 Button}
+    Page Should Contain Element    ${New score button}
+
+Logout Caresharing
+    Click Element    ${Logout Icon}
+    Wait Until Element Is Visible    ${Login Form}
+    Title Should Be    Account - Sign in
+
+Check Input validity in Login page
+    Set Selenium Timeout    ${Selenium Timeout}
+    Wait Until Element Is Visible    ${Login Caresharing}
+    Click Element    ${Login Caresharing}
+    Wait Until Element Is Visible    ${Login Form}
+    Click Button    ${Login Button}
+    Wait Until Element Is Visible    ${Error_Username / Password is incorrect}
+    Element Text Should Be    ${Error_Username / Password is incorrect}    Gebruikersnaam/Wachtwoord is niet juist
+    Input Text    ${User Login Field}    ${Username Invalid}
+    Input Text    ${User Password Field}    ${Password Invalid}
+    Click Button    ${Login Button}
+    Wait Until Element Is Visible    ${Error_Username / Password is incorrect}
+    Element Text Should Be    ${Error_Username / Password is incorrect}    Gebruikersnaam/Wachtwoord is niet juist
+
+Input Invalid on each field
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Please fill out all data in the first form.}
+    Page Should Contain Element    ${Error_Please fill out all data in the first form.}
+    Input Text    ${Age Field}    ${Input Invalid Age}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Error_Please fill out all data in the first form.}
+    Clear Element Text    ${Age Field}
+    Input Text    ${Blood Pressure Field}    ${BloodPressure Invalid}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Error_Please fill out all data in the first form.}
+    Clear Element Text    ${Blood Pressure Field}
+    Input Text    ${Cholesterol Field}    ${Cholesterol Invalid}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Error_Please fill out all data in the first form.}
+    Clear Element Text    ${Cholesterol Field}
+    Input Text    ${Hdl Field}    ${Hdl Invalid}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Error_Please fill out all data in the first form.}
+    Clear Element Text    ${Hdl Field}
+    Input Text    ${Age Field}    ${Input Invalid Age}
+    Input Text    ${Blood Pressure Field}    ${BloodPressure Invalid}
+    Input Text    ${Cholesterol Field}    ${Cholesterol Invalid}
+    Input Text    ${Hdl Field}    ${Hdl Invalid}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Error_If All Inputs_Invalid}
+    Page Should Contain Element    ${Output Chart}
+    Clear Element Text    ${Age Field}
+    Clear Element Text    ${Blood Pressure Field}
+    Clear Element Text    ${Cholesterol Field}
+    Clear Element Text    ${Hdl Field}
+    Reload Page
+
+Check Input trigger errors
+    Click Element    ${RadioButton_Vascular2_Yes}
+    Page Should Contain    Risicoschatting niet van toepassing bij hart-vaatziekten.
+    Page Should Contain Element    ${Vascular_message}
+    Page Should Contain Button    ${Calculate2 Button}
+    Click Element    ${RadioButton_Vascular2_No}
+    Input Text    ${Age Field}    40
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Diabetes2_Yes}
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Diabetic-Rheumatic Enabled}
+    Element Text Should Be    ${Error_Diabetic-Rheumatic Enabled}    De score kan niet berekend worden omdat zowel diabetes als reuma aanwezig is
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    20
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Diabetes2_No}
+    Click Element    ${RadioButton_Rheumatism2_No}
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Below 40}
+    Element Text Should Be    ${Error_Below 40}    Risicoschatting niet mogelijk vanwege leeftijd < 40; uitgaande van 40 jaar is het risico:
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    80
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Risk Score}
+    Wait Until Element Is Visible    ${Error_Above 70}
+    Element Text Should Be    ${Error_Above 70}    Risicoschatting niet mogelijk vanwege leeftijd > 70; uitgaande van 70 jaar is het risico:
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    20
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Diabetes2_Yes}
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Diabetic Below 25}
+    Element Text Should Be    ${Error_Diabetic Below 25}    Risicoschatting niet mogelijk vanwege leeftijd < 25; uitgaande van 25 jaar is het risico:
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    60
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Diabetes2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Risk Score}
+    Wait Until Element Is Visible    ${Error_Diabetic Above 55}
+    Element Text Should Be    ${Error_Diabetic Above 55}    Risicoschatting niet mogelijk vanwege leeftijd > 55; uitgaande van 55 jaar is het risico:
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    20
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Rheumatism Below 25}
+    Element Text Should Be    ${Error_Rheumatism Below 25}    Risicoschatting niet mogelijk vanwege leeftijd < 25; uitgaande van 25 jaar is het risico:
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    60
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Risk Score}
+    Wait Until Element Is Visible    ${Error_Rheumatis Above 55}
+    Element Text Should Be    ${Error_Rheumatis Above 55}    Risicoschatting niet mogelijk vanwege leeftijd > 55; uitgaande van 55 jaar is het risico:
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Element Is Visible    ${Change Risk Button}
+    Page Should Contain Element    ${Change Risk Button}
+    Page Should Contain Element    ${Advice Dialog}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    40
+    Input Text    ${Blood Pressure Field}    100
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Blood Pressure Below 120}
+    Element Text Should Be    ${Error_Blood Pressure Below 120}    Risicoschatting niet mogelijk vanwege RR < 120; Uitgaande van een RR van 120 is de risicoschatting
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    40
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    100
+    Input Text    ${Hdl Field}    100
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Cholesterol Level1}
+    Element Text Should Be    ${Error_Cholesterol Level1}    Risicoschatting niet mogelijk vanwege Chol/Hdl ratio < 4; Uitgaande van een Chol/Hdl ratio van 4 is de risicoschatting
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Age Field}
+    Input Text    ${Age Field}    40
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    1000
+    Input Text    ${Hdl Field}    100
+    Click Button    ${Calculate2 Button}
+    Wait Until Element Is Visible    ${Error_Cholesterol Leve 2}
+    Element Text Should Be    ${Error_Cholesterol Leve 2}    Risicoschatting niet mogelijk vanwege Chol/Hdl ratio > 8; Uitgaande van een Chol/Hdl ratio van 8 is de risicoschatting
+    Click Element    ${Change Risk Button}
+    Wait Until Element Is Visible    ${Compare}
+    Page Should Contain Element    ${Compare}
+    Page Should Contain Element    ${New Form Score Entry}
+    Page Should Contain Element    ${Ouput Chart2}
+    Page Should Contain Element    ${Calculate2 Button_New}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Page Should Not Contain Element    ${New Form Score Entry}
+    Page Should Not Contain Element    ${Ouput Chart2}
+
+Patient1
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name1}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    40
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    40
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Set Selenium Timeout    15
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 1%
+    Set Selenium Timeout    15
+    Wait Until Element Is Visible    ${Advice1}
+    Page Should Contain Element    ${Advice1}
+    Element Text Should Be    ${Advice1}    Score < 10% : Leefstijladviezen volstaan.
+
+Patient2
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name2}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    44
+    Input Text    ${Blood Pressure Field}    130
+    Input Text    ${Cholesterol Field}    335
+    Input Text    ${Hdl Field}    44
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Element Is Visible    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 8%
+    Wait Until Element Is Visible    ${Advice1}
+    Page Should Contain Element    ${Advice1}
+    Element Text Should Be    ${Advice1}    Score < 10% : Leefstijladviezen volstaan.
+    Element Text Should Be    ${Patient_2_GenderAgenotRiskFactor}    Geslacht en leeftijd zijn niet te beinvloeden risicofactoren. Wel te beinvloeden zijn: roken, cholesterol en bloeddruk.
+    Page Should Contain Element    ${Patient_2_Pie}
+
+Patient3
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name3}
+    Click Element    ${RadioButton_Gender_F}
+    Input Text    ${Age Field}    50
+    Input Text    ${Blood Pressure Field}    140
+    Input Text    ${Cholesterol Field}    250
+    Input Text    ${Hdl Field}    55
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 3%
+    Wait Until Element Is Visible    ${Advice1}
+    Page Should Contain Element    ${Advice1}
+    Element Text Should Be    ${Advice1}    Score < 10% : Leefstijladviezen volstaan.
+
+Patient4
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name4}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    70
+    Input Text    ${Blood Pressure Field}    150
+    Input Text    ${Cholesterol Field}    250
+    Input Text    ${Hdl Field}    30
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Element    ${RadioButton_Diabetes2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Set Selenium Timeout    15
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: > 50%
+    Wait Until Element Is Visible    ${Advice2}
+    Page Should Contain Element    ${Advice2}
+
+Patient5
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name5}
+    Click Element    ${RadioButton_Gender_F}
+    Input Text    ${Age Field}    60
+    Input Text    ${Blood Pressure Field}    130
+    Input Text    ${Cholesterol Field}    100
+    Input Text    ${Hdl Field}    40
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 20%
+    Wait Until Element Is Visible    ${Advice3}
+    Page Should Contain Element    ${Advice3}
+
+Patient6
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name6}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    58
+    Input Text    ${Blood Pressure Field}    150
+    Input Text    ${Cholesterol Field}    370
+    Input Text    ${Hdl Field}    50
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: > 50%
+    Wait Until Element Is Visible    ${Advice2}
+    Page Should Contain Element    ${Advice2}
+
+Patient7
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name7}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    66
+    Input Text    ${Blood Pressure Field}    290
+    Input Text    ${Cholesterol Field}    499
+    Input Text    ${Hdl Field}    30
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: > 50%
+    Wait Until Element Is Visible    ${Advice3}
+    Page Should Contain Element    ${Advice3}
+
+Patient8
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name8}
+    Click Element    ${RadioButton_Gender_F}
+    Input Text    ${Age Field}    45
+    Input Text    ${Blood Pressure Field}    190
+    Input Text    ${Cholesterol Field}    500
+    Input Text    ${Hdl Field}    100
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 23%
+    Wait Until Element Is Visible    ${Advice3}
+    Page Should Contain Element    ${Advice3}
+
+Patient9
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name9}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    50
+    Input Text    ${Blood Pressure Field}    125
+    Input Text    ${Cholesterol Field}    200
+    Input Text    ${Hdl Field}    50
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Element    ${RadioButton_Rheumatism2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 18%
+    Wait Until Element Is Visible    ${Advice4}
+    Page Should Contain Element    ${Advice4}
+
+Patient10
+    Wait Until Page Contains Element    ${Applications Dropdown}
+    Wait Until Page Contains Element    ${Patients Name Field}
+    Input Text    ${Patients Name Field}    ${Name10}
+    Click Element    ${RadioButton_Gender_M}
+    Input Text    ${Age Field}    50
+    Input Text    ${Blood Pressure Field}    129
+    Input Text    ${Cholesterol Field}    234
+    Input Text    ${Hdl Field}    55
+    Click Element    ${RadioButton_Smoking2_Yes}
+    Click Element    ${RadioButton_Diabetes2_Yes}
+    Click Button    ${Calculate2 Button}
+    Page Should Contain Element    ${Output Chart}
+    Wait Until Page Contains Element    ${Risk Score}
+    Page Should Contain Element    ${Risk Score}
+    Element Text Should Be    ${Risk Score}    Risico: 20%
+    Wait Until Element Is Visible    ${Advice4}
+    Page Should Contain Element    ${Advice4}
+
+Open History Result
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Set Selenium Timeout    15
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    Page Should Contain Element    ${History List}
+    Page Should Contain    ${Name1}
+    Page Should Contain    ${Name2}
+    Page Should Contain    ${Name3}
+    Page Should Contain    ${Name4}
+    Page Should Contain    ${Name5}
+    Page Should Contain    ${Name6}
+    Page Should Contain    ${Name7}
+    Page Should Contain    ${Name8}
+    Page Should Contain    ${Name9}
+    Page Should Contain    ${Name10}
+    Page Should Contain Element    ${Button_Go Back}
+
+Open Results and Download
+    #Download Name1
+    Click Element    ${Open Name1}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name1}
+    Wait Until Element Is Visible    ${Output Chart}
+    Wait Until Element Is Visible    ${Download Icon}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name2
+    Click Element    ${Open Name2}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name2}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name3
+    Click Element    ${Open Name3}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name3}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name4
+    Click Element    ${Open Name4}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name4}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name5
+    Click Element    ${Open Name5}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name5}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name6
+    Click Element    ${Open Name6}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name6}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name7
+    Click Element    ${Open Name7}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name7}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name8
+    Click Element    ${Open Name8}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name8}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name9
+    Click Element    ${Open Name9}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name9}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Download Name10
+    Click Element    ${Open Name10}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name10}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${Download Icon}
+    Set Selenium Timeout    15
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+
+Open/Modify each result
+    #Open Name1 result / Modify Name1 result
+    Click Element    ${Open Name1}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name1}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Age Field}    50
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name2 result / Modify Name2 result
+    Click Element    ${Open Name2}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name2}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Blood Pressure Field}    120
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name3 result / Modify Name3 result
+    Click Element    ${Open Name3}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name3}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Cholesterol Field}    200
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name4 result / Modify Name4 result
+    Click Element    ${Open Name4}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name4}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Hdl Field}    40
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name5 result / Modify Name5 result
+    Click Element    ${Open Name5}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name5}
+    Click Element    ${Button_Edit Result}
+    Click Element    ${RadioButton_Rheumatism2_No}
+    Click Element    ${RadioButton_Diabetes2_Yes}
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name6 result / Modify Name6 result
+    Click Element    ${Open Name6}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name6}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Blood Pressure Field}    120
+    Input Text    ${Cholesterol Field}    200
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name7 result / Modify Name7 result
+    Click Element    ${Open Name7}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name7}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Cholesterol Field}    300
+    Click Element    ${RadioButton_Smoking2_No}
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name8 result / Modify Name8 result
+    Click Element    ${Open Name8}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name8}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Cholesterol Field}    250
+    Click Element    ${RadioButton_Rheumatism2_No}
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name9 result / Modify Name9 result
+    Click Element    ${Open Name9}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name9}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Blood Pressure Field}    150
+    Click Element    ${RadioButton_Smoking2_No}
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+    #Open Name10 result / Modify Name10 result
+    Click Element    ${Open Name10}
+    Wait Until Element Is Visible    ${Output Chart}
+    Page Should Contain    ${Name10}
+    Click Element    ${Button_Edit Result}
+    Input Text    ${Age Field}    60
+    Input Text    ${Blood Pressure Field}    125
+    Input Text    ${Cholesterol Field}    190
+    Input Text    ${Hdl Field}    35
+    Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Output Chart}
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
+    Click Element    ${DropdownSel_View full list of previous scores}
+    Wait Until Element Is Visible    ${History List}
+
+Delete Saved Result
+    Wait Until Element Is Visible    ${Delete Name1}
+    Click Element    ${Delete Name1}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name2}
+    Click Element    ${Delete Name2}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name3}
+    Click Element    ${Delete Name3}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name4}
+    Click Element    ${Delete Name4}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name5}
+    Click Element    ${Delete Name5}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name6}
+    Click Element    ${Delete Name6}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name7}
+    Click Element    ${Delete Name7}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name8}
+    Click Element    ${Delete Name8}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name9}
+    Click Element    ${Delete Name9}
+    Confirm Action
+    Wait Until Element Is Visible    ${Delete Name10}
+    Click Element    ${Delete Name10}
+    Confirm Action
+    Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Search for previous score Field}
+    Click Element    ${Search for previous score Field}
+    Wait Until Element Is Visible    ${View Saved results}
+    Click Element    ${View Saved results}
+    Page Should Not Contain    ${Name1}
+    Page Should Not Contain    ${Name2}
+    Page Should Not Contain    ${Name3}
+    Page Should Not Contain    ${Name4}
+    Page Should Not Contain    ${Name5}
+    Page Should Not Contain    ${Name6}
+    Page Should Not Contain    ${Name7}
+    Page Should Not Contain    ${Name8}
+    Page Should Not Contain    ${Name9}
+    Page Should Not Contain    ${Name10}
+
+Closing the browser
+    Close Browser
+
+Login
+    Input Text    ${User Login Field}    ${Username}
+    Input Text    ${User Password Field}    ${Password}
+    Click Button    ${Login Button}
+
+Signup page
+    Open Browser    ${Signing URL}    ${BROWSER}
+    Delete All Cookies
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}

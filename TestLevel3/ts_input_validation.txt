@@ -1,0 +1,19 @@
+*** Settings ***
+Resource          resources.txt
+Resource          testdata.txt
+Library           Selenium2Library
+Resource          testdata.txt
+
+*** Test Cases ***
+Login Input validattion
+    [Setup]    Open Browser To Test Page
+    Check Input validity in Login page
+    [Teardown]    Closing the Browser
+
+SCORE risicometer page input validation
+    [Setup]    Open Browser To Test Page
+    Loging Caresharing
+    Input Invalid on each field
+    Check Input trigger errors
+    Logout Caresharing
+    [Teardown]    Closing the Browser

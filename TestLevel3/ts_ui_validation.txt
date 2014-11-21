@@ -1,0 +1,16 @@
+*** Settings ***
+Resource          resources.txt
+
+*** Test Cases ***
+Welcome page
+    [Setup]    Open Browser To Test Page
+    Test Page Should Be Open
+    Verify GUI on the Welcome Page
+    Verify Buttons, Input Fields and Radio buttons on Welcome Page
+    [Teardown]    Closing the Browser
+
+SCORE risicometer Page
+    [Setup]    Open Browser To Test Page
+    Loging Caresharing
+    Verify Buttons, Input Fields and Radio buttons on SCORE Page
+    [Teardown]    Closing the Browser

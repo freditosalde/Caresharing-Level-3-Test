@@ -1,0 +1,10 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          resources.txt
+
+*** Test Cases ***
+Download Results
+    [Setup]    Signup page
+    Login
+    Open History Result
+    Open Results and Download

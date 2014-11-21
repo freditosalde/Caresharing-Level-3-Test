@@ -1,0 +1,64 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          resources.txt
+
+*** Test Cases ***
+Risk Calc on Patient1
+    [Setup]    Signup page
+    Login
+    Patient1
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient2
+    [Setup]    Signup page
+    Login
+    Patient2
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient3
+    [Setup]    Signup page
+    Login
+    Patient3
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient4
+    [Setup]    Signup page
+    Login
+    Patient4
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient5
+    [Setup]    Signup page
+    Login
+    Patient5
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient6
+    [Setup]    Signup page
+    Login
+    Patient6
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient7
+    [Setup]    Signup page
+    Login
+    Patient7
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient8
+    [Setup]    Signup page
+    Login
+    Patient8
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient9
+    [Setup]    Signup page
+    Login
+    Patient9
+    [Teardown]    Closing the browser
+
+Risk Calc on Patient10
+    [Setup]    Signup page
+    Login
+    Patient10
+    [Teardown]    Closing the browser

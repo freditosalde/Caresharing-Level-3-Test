@@ -1,0 +1,161 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+
+*** Variables ***
+${URL}            http://scoremeter.nl/
+${BROWSER}        firefox
+${DELAY}          1
+${Welcome_Header1}    xpath=/html/body/div[4]/div[1]/div/div/h2
+${Welcome_Header1.1}    xpath=/html/body/div[4]/div[1]/div/div/p[1]
+${Welcome_Header1.2}    xpath=/html/body/div[4]/div[1]/div/div/p[2]
+${Help}           xpath=/html/body/div[4]/div[1]/div/a[2]
+${Login Caresharing}    xpath=/html/body/div[4]/div[1]/div/a[3]
+${Add to Caresharing Button}    xpath=/html/body/div[4]/div[2]/div[2]/div/a
+${Reminder}       xpath=/html/body/div[4]/div[2]/div[2]/div/span
+${Chart}          xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[2]
+${Cardiovascular disease}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[1]/td[1]/label
+${RadioButton_Vascular_Yes}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[1]/td[2]/input
+${RadioButton_Vascular_No}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[1]/td[3]/input
+${Username}       score.tester
+${Password}       Adm1n *PW 1001
+${Age}            xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[2]/td[1]/label
+${Age Field}      risk_data_age
+${Gender}         xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[3]/td[1]/label
+${Gender_M_Radio}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[3]/td[2]/table/tbody/tr[1]/td[2]/input
+${Gender_F_Radio}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[3]/td[2]/table/tbody/tr[2]/td[2]/input
+${Blood Pressure}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[4]/td[1]/label
+${Blood Pressure Field}    risk_data_systolisch
+${Cholesterol}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[5]/td[1]/label
+${Cholesterol Field}    risk_data_cholesterol
+${Cholesterol Guage}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[5]/td[3]/span
+${Hdl-cholesterol}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[6]/td[1]/label
+${Hdl Guage}      xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[6]/td[2]/input
+${Hdl Field}      risk_data_hdl
+${Smoking}        xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[8]/td[1]/label
+${RadioButton_Smoking_Yes}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[8]/td[2]/input
+${RadioButton_Smoking_No}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[8]/td[3]/input
+${Diabetes}       xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[9]/td[1]/label
+${RadioButton_Diabetes_Yes}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[9]/td[2]/input
+${RadioButton_Diabetes_No}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[9]/td[3]/input
+${Rheumatism}     xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[10]/td[1]/label
+${RadioButton_Rheumatism_Yes}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[10]/td[2]/input
+${RadioButton_Rheumatism_No}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/fieldset/table/tbody/tr[10]/td[3]/input
+${Calculate Button}    xpath=/html/body/div[4]/div[2]/div[1]/div/div[2]/form/div[1]/div/span/span/input[1]
+${Login Form}     xpath=/html/body/div/div[3]/div[1]
+${User Login Text}    xpath=/html/body/div/div[3]/div[1]/form/div[2]/label
+${User Login Field}    user_login
+${User Password Text}    xpath=/html/body/div/div[3]/div[1]/form/div[3]/label
+${User Password Field}    xpath=/html/body/div/div[3]/div[1]/form/div[3]/input
+${Login Button}    xpath=/html/body/div/div[3]/div[1]/form/div[4]/button
+${I can not login! Link}    xpath=/html/body/div/div[3]/div[1]/form/div[4]/div/div[1]/a[1]
+${Email the helpdesk for direct support. Link}    xpath=/html/body/div/div[3]/div[1]/form/div[4]/div/div[1]/a[2]
+${Logo}           xpath=/html/body/div/div[3]/div[1]/form/div[4]/div/div[2]/a/i
+${Click here to view our support page. Link}    xpath=/html/body/div/div[3]/div[1]/form/div[4]/div/div[2]/a
+${Footer2}        xpath=/html/body/div[7]/div/div[1]/div/div[6]/p
+${Footer1}        xpath=/html/body/div[4]/div[2]/div[1]/div/div[5]/p
+${RadioButton_Vascular2_Yes}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[1]/td[2]/input
+${RadioButton_Vascular2_No}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[1]/td[3]/input
+${RadioButton_Gender_M}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[3]/td[2]/table/tbody/tr[1]/td[2]/input
+${RadioButton_Gender_F}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[3]/td[2]/table/tbody/tr[2]/td[2]/input
+${RadioButton_Smoking2_Yes}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[8]/td[2]/input
+${RadioButton_Smoking2_No}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[8]/td[3]/input
+${RadioButton_Diabetes2_Yes}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[9]/td[2]/input
+${RadioButton_Diabetes2_No}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[9]/td[3]/input
+${RadioButton_Rheumatism2_Yes}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[10]/td[2]/input
+${RadioButton_Rheumatism2_No}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/fieldset/table/tbody/tr[10]/td[3]/input
+${Search for previous score Field}    xpath=/html/body/div[6]/div[2]/form/input
+${Applications Dropdown}    xpath=/html/body/div[4]/div[1]/div[2]
+${Patients Name Field}    risk_data_patient_name
+${Date of Birth Field}    risk_data_patient_dob
+${Commentary Fields}    risk_data_score_comment
+${Help Icon}      xpath=/html/body/div[4]/div[1]/div[6]/ul/li[3]/a/img
+${Settings Icon}    xpath=/html/body/div[4]/div[1]/div[6]/ul/li[2]/a/img
+${Logout Icon}    xpath=/html/body/div[4]/div[1]/div[6]/ul/li[1]/a/img
+${Calculate2 Button}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/div/span/span/input[1]
+${New score button}    xpath=/html/body/div[7]/div/div[1]/div/div[1]/a
+${Error_Username / Password is incorrect}    xpath=/html/body/div[2]/div
+${Username Invalid}    abcdefghijklmno12345678901234567890
+${Password Invalid}    abcdefghijklmno12345678901234567890
+${Error_Please fill out all data in the first form.}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div
+${Input Invalid Age}    1234567890
+${Selenium Timeout}    15
+${BloodPressure Invalid}    1234567890
+${Cholesterol Invalid}    1.2.3.4.5.6.7.8.9.0
+${Hdl Invalid}    1.2.3.4.5.6.7.8.9.0
+${Error_If All Inputs_Invalid}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div
+${Output Chart}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/span[1]/div[4]/object
+${Blank}          ${EMPTY}
+${Vascular_message}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/span[2]
+${Error_Below 40}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div
+${Error_Above 70}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div
+${Change Risk Button}    xpath=/html/body/div[7]/div/div[1]/div/div[4]/span/a
+${Advice Dialog}    xpath=/html/body/div[7]/div/div[1]/div/div[5]
+${New Form Score Entry}    xpath=/html/body/div[7]/div/div[1]/div/div[4]/form/div[1]
+${Ouput Chart2}    xpath=/html/body/div[7]/div/div[1]/div/div[4]/form/div[2]/div/object
+${Calculate2 Button_New}    xpath=/html/body/div[7]/div/div[1]/div/div[4]/form/div[1]/div/span/span/input
+${Risk Score}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/span[1]/div[2]
+${Error_Diabetic Below 25}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Diabetic below age limit of 25
+${Error_Diabetic Above 55}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Diabetic above age limit of 55
+${Error_Rheumatism Below 25}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Rheumatism below age limit of 25
+${Error_Rheumatis Above 55}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Rheumatism above age limit of 55
+${Compare}        xpath=/html/body/div[7]/div/div[1]/div/div[4]/form/div[1]/fieldset/legend
+${Error_Blood Pressure Below 120}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Blood Pressure below 120
+${Error_Cholesterol Level1}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Cholesterol ratio not posible
+${Error_Cholesterol Leve 2}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div    # Cholesterol ratio not posible
+${Error_Diabetic-Rheumatic Enabled}    xpath=/html/body/div[7]/div/div[1]/div/div[2]/div
+${Advice1}        xpath=/html/body/div[7]/div/div[1]/div/div[5]/div[1]/div[2]
+${Download Icon}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/span[1]/div[3]/a/img
+${DropdownSel_View full list of previous scores}    xpath=/html/body/div[6]/div[2]/div/ul/li[11]
+${Patient_1}      xpath=/html/body/div[6]/div[2]/div/ul/li[1]/span/span[1]
+${Patient_2_Pie}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/span[1]/div[5]/div[3]/object
+${Patient_2_GenderAgenotRiskFactor}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/span[1]/div[5]/div[1]
+${Advice2}        xpath=/html/body/div[7]/div/div[1]/div/div[5]/div[1]/div[4]
+${Selection Text}    Bekijk volledige lijst met voorgaande scores
+${Advice3}        xpath=/html/body/div[7]/div/div[1]/div/div[5]
+${Name1}          Ian Salde
+${Name2}          Glenn Rible
+${Name3}          Steph Consad
+${Name4}          Charm Berdon
+${Name5}          Gail Alquiza
+${Name6}          Monico Sabala
+${Name7}          Fritz Ocampo
+${Name8}          Marilou Almanoche
+${Name9}          Cyruz Mutia
+${Name10}         Rey Ann Ebesa
+${Search for previous score}    search_name
+${Advice4}        xpath=/html/body/div[7]/div/div[1]/div/div[5]
+${History List}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div
+${Button_Go Back}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/a
+${Delete Name1}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[7]/li/span[2]/img
+${Delete Name2}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[6]/li/span[2]/img
+${Delete Name3}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[11]/li/span[2]/img
+${Delete Name4}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[2]/li/span[2]/img
+${Delete Name5}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[5]/li/span[2]/img
+${Delete Name6}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[9]/li/span[2]/img
+${Delete Name7}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[4]/li/span[2]/img
+${Delete Name8}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[8]/li/span[2]/img
+${Delete Name9}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[3]/li/span[2]/img
+${Delete Name10}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[10]/li/span[2]/img
+${Open Name1}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[7]/li/span[1]/span[1]
+${Open Name2}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[6]/li/span[1]/span[1]
+${Open Name3}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[11]/li/span[1]/span[1]
+${Open Name4}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[2]/li/span[1]/span[1]
+${Open Name5}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[5]/li/span[1]/span[1]
+${Open Name6}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[9]/li/span[1]/span[1]
+${Open Name7}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[4]/li/span[1]/span[1]
+${Open Name8}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[8]/li/span[1]/span[1]
+${Open Name9}     xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[3]/li/span[1]/span[1]
+${Open Name10}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[10]/li/span[1]/span[1]
+${Patient Name Location}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[1]/input[2]
+${Button_Edit Result}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/div/span/span/input[2]
+${Button Submit}    xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[2]/div/span/span/input[1]
+${test}           xpath=/html/body/div[7]/div/div[1]/div/div[3]/form/div[3]/div/div/ul[12]/li/span[2]/img
+${Signing URL}    https://home.caresharing.eu/users/sign_in
+${View Saved results}    xpath=/html/body/div[6]/div[2]/div/ul/li[1]
+
+*** Keywords ***
