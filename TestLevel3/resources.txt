@@ -654,6 +654,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -668,6 +669,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -682,6 +684,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -696,6 +699,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -711,6 +715,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -726,6 +731,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -741,6 +747,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -754,8 +761,10 @@ Open/Modify each result
     Input Text    ${Cholesterol Field}    250
     Click Element    ${RadioButton_Rheumatism2_No}
     Click Element    ${Button Submit}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Page Contains Element    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -771,6 +780,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}
@@ -788,6 +798,7 @@ Open/Modify each result
     Click Element    ${Button Submit}
     Wait Until Element Is Visible    ${Output Chart}
     Click Element    ${New score button}
+    Wait Until Element Is Visible    ${Applications Dropdown}
     Wait Until Element Is Visible    ${Search for previous score Field}
     Click Element    ${Search for previous score Field}
     Wait Until Element Is Visible    ${DropdownSel_View full list of previous scores}

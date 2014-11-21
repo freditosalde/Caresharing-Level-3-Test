@@ -4,19 +4,21 @@ Resource          resources.txt
 
 *** Test Cases ***
 Show Saved Results
-    [Setup]    Open Browser To Test Page
-    Loging Caresharing
+    [Setup]    Signup page
+    Login
     Open History Result
     [Teardown]    Closing the browser
 
 Open Saved Results and Update/Modify Result
-    [Setup]    Open Browser To Test Page
-    Loging Caresharing
+    [Setup]    Signup page
+    Login
     Open History Result
     Open/Modify each result
+    [Teardown]    Closing the browser
 
 Delete Results
     [Setup]    Signup page
     Login
     Open History Result
     Delete Saved Result
+    [Teardown]    Closing the browser
